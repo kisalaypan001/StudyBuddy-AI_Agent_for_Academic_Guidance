@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue SPA Example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  integrity="sha512-1yHF2w9c3+UZZ9VXh+fExjyow0SH3uOd3FOnFVw7FocFZ06Gm4fU1wA05VxakTH2D"
+  crossorigin="anonymous"
+/>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <button @click="changeMessage">Click Me</button>
+
+        <nav>
+            <a href="#" @click.prevent="currentView = 'home'">Home</a> |
+            <a href="#" @click.prevent="currentView = 'about'">About</a>
+        </nav>
+
+        <div v-if="currentView === 'home'">
+            <h2>Welcome to the Home Page</h2>
+            <p>This is the home section of our Vue SPA.</p>
+        </div>
+
+        <div v-if="currentView === 'about'">
+            <h2>About Us</h2>
+            <p>This is the about section of our Vue SPA.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
