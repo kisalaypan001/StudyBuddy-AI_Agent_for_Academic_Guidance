@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Report - 2025-04-01 21:50:49.983478</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .summary-section, .descriptive-stats, .visualizations, .student-table {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .average {
+            font-weight: bold;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Performance Report - 2025-04-01 21:50:49.983478</h1>
+    </div>
+
+    <div class="summary-section">
+        <h2>Summary</h2>
+        <p>Total Number of Students: 12</p>
+        <p>Subjects: Quiz 1, Quiz 2, End Term</p>
+        <p>Class-wide Average:
+            <span class="average">
+                Quiz 1: 68.33%, Quiz 2: 72.33%, End Term: 76.67%
+            </span>
+        </p>
+    </div>
+
+    <div class="descriptive-stats">
+        <h2>Descriptive Statistics</h2>
+        <table>
+            <tr>
+                <th>Assessment</th>
+                <th>Mean</th>
+                <th>Median</th>
+                <th>Mode</th>
+                <th>Standard Deviation</th>
+            </tr>
+            <tr>
+                <td>Quiz 1</td>
+                <td>68.33</td>
+                <td>76</td>
+                <td>86.0</td>
+                <td>13.21</td>
+            </tr>
+            <tr>
+                <td>Quiz 2</td>
+                <td>72.33</td>
+                <td>76</td>
+                <td>80.0</td>
+                <td>10.45</td>
+            </tr>
+            <tr>
+                <td>End Term</td>
+                <td>76.67</td>
+                <td>77</td>
+                <td>90.0</td>
+                <td>12.89</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="visualizations">
+        <h2>Visualizations</h2>
+        <canvas id="performanceChart"></canvas>
+    </div>
+
+    <div class="student-table">
+        <h2>Student-wise Performance</h2>
+        <table>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Quiz 1</th>
+                <th>Quiz 2</th>
+                <th>End Term</th>
+                <th>Average</th>
+            </tr>
+            <!-- Student data rows would be dynamically generated here -->
+        </table>
+    </div>
+
+    <script>
+        // Sample data for visualization
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Quiz 1', 'Quiz 2', 'End Term'],
+                datasets: [{
+                    label: 'Class Average',
+                    data: [68.33, 72.33, 76.67],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        display: true
+                    }
+                }
+            }
+        });
+
+        // Calculate statistics
+        function calculateStats(data) {
+            const means = data.reduce((acc, curr) => {
+                acc.Quiz1 = (acc.Quiz1 || 0) + curr.Quiz1;
+                acc.Quiz2 = (acc.Quiz2 || 0) + curr.Quiz2;
+                acc.EndTerm = (acc.EndTerm || 0) + curr.EndTerm;
+                return acc;
+            }, {});
+
+            return {
+                mean: {
+                    Quiz1: means.Quiz1 / data.length,
+                    Quiz2: means.Quiz2 / data.length,
+                    EndTerm: means.EndTerm / data.length
+                }
+            };
+        }
+    </script>
+</body>
+</html>
